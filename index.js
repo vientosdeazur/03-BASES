@@ -1,7 +1,38 @@
-const argv = require('yargs/yargs')(process.argv.slice(2)).argv;
-const {multiplicar} = require ("./multiplicar")
+const argv = require('yargs')
 
-console.log (argv._);
-const base = 4;
+.option ('b', {
+    alias:'base',
+    type: 'number',
+    demandOption: true,
+    describe: 'Es la base de la tabla de multiplicar'
+})
+.option ('l', {
+    alias:'limite',
+    type: 'number',
+    demandOption: true,
+    describe: 'Es el numero maximo por el cual se va multiplicar'
+})
 
-multiplicar(base);
+.option ('v', {
+    alias: 'visualizar',
+    type: 'boolean',
+    demandOption: false,
+    describe: 'Muestra la tabla creada'
+})
+
+.check((argv, options)=> {
+    if (isNaN (argv.b) && isNaN (argv.l)){
+        throw new Error("El valor ingresado debe ser un número")
+    } else {
+        return true;
+    }
+
+
+})
+.help()
+.version ()
+.argv;
+const {multiplicar} = require ("./multiplicar");
+
+
+multiplicar(argv.b,argv.l,argv.v);

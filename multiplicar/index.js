@@ -1,14 +1,17 @@
 const fs = require ('fs'); //importar funciones de Filesystem de nodejs
 const {logica} = require ("./logica");
 
-const multiplicar = (base) => {
-console.log (`============
-Tabla del ${base}
-============`)
-const resultado = logica(base);
+const multiplicar = (base,limite,visualizar) => {
+    const resultado = logica(base,limite);
 
-console.log (resultado);
-fs.writeFileSync(`tablas/tabla-del-${base}`,resultado);
+if (visualizar){
+    console.log (`============
+    Tabla del ${base}
+    ============`)    
+    console.log (resultado);
+}
+    
+fs.writeFileSync(`tablas/tabla-del-${base}.txt`,resultado);
 }
 
 module.exports = {
