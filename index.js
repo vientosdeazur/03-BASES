@@ -9,7 +9,8 @@ const argv = require('yargs')
 .option ('l', {
     alias:'limite',
     type: 'number',
-    demandOption: true,
+    default: '10',
+    demandOption: false,
     describe: 'Es el numero maximo por el cual se va multiplicar'
 })
 
